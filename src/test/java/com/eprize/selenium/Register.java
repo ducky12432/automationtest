@@ -28,7 +28,7 @@ public class Register {
     private String userAge = "25-35";
     private String userPhone = "3152940003";
     private String friendName = "John";
-    private String friendEmail = "ducky12432+1@hotmail.com";
+    private String friendEmail = "ducky12432+" + randomText() +  "@hotmail.com";
     private String registrationComplete = "How nice of you to give your friend a chance to win. " +
             "I hope they appreciate your generosity. Come back tomorrow for another chance to win.";
 
