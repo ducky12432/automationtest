@@ -6,11 +6,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.Assert.assertTrue;
 
-public class RegisterUser {
+public class SiteUp {
 
 
     @Test
-    public void Register() {
+    public void TestSite() {
         WebDriver driver = new FirefoxDriver();
         driver.get("https://helloworld.promo.eprize.com/automationtest/");
 

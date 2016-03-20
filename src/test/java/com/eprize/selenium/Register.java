@@ -47,7 +47,9 @@ public class Register {
     @Test
     public void testRegister() throws Exception {
         driver.get(baseUrl + "automationtest/");
-
+        if (driver.findElement(By.cssSelector("h2")).getText() == "Login Now"){
+            driver.findElement(By.linkText("Not registered?")).click();
+        }
         driver.findElement(By.id("first_name")).clear();
         driver.findElement(By.id("first_name")).sendKeys(userNameFirst);
         driver.findElement(By.id("last_name")).clear();
