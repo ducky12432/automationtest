@@ -6,7 +6,7 @@ These tests should be able to be run individually or sequentially as a Suite.
 
 Order of execution if done manually would be SiteUp, Register, Login, FailLogin.
 
-For the test suite the first test till assert that the site is reachable,
+For this Test Suite the first test will assert that the site is reachable,
 from there a new user will be created.
 
 A demonstration of a valid and invalid login will also be demonstrated.
