@@ -15,10 +15,6 @@ public class Login {
     private SecureRandom random = new SecureRandom();
     private WebDriver driver;
     private String baseUrl;
-
-    //setting the variable in the suite is not the best practise but for this purpose it will work.
-    //The best case is to use a generic set of parameters that are sent in as maven parameters when executed in Jenkins
-    //
     private String userEmail = "newell.donald@gmail.com";
     private String friendName = "John";
     private String friendEmail = "ducky12432+" + randomText() + "@hotmail.com";
@@ -33,7 +29,6 @@ public class Login {
     public String randomText() {
         return new BigInteger(16, random).toString(16);
     }
-
 
     @Before
     public void setUp() throws Exception {
@@ -53,7 +48,7 @@ public class Login {
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys(userEmail);
         driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);\
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
         //had some page load timing issues. Make sure to catch the correct page element.
         for (int second = 0; ; second++) {
@@ -77,8 +72,6 @@ public class Login {
         driver.findElement(By.id("to_email1")).sendKeys(friendEmail);
         driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
         assertEquals(userFriend, driver.findElement(By.cssSelector("p")).getText());
-
-
     }
 
     @After
