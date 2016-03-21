@@ -7,16 +7,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Created by dnewell on 3/20/16.
+ * This Test Class tests that an email address that is not in the system is not logged in,
+ * instead that user is redirected to the new user page.
+ */
 public class FailLogin {
     private WebDriver driver;
     private String baseUrl;
     private String userEmailFail = "newell.donald@gmail.con";
     private String failText = "Enter Now";
 
+    /**
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
@@ -24,6 +32,10 @@ public class FailLogin {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testLoginValid() throws Exception {
         driver.get(baseUrl + "automationtest/");
@@ -44,6 +56,10 @@ public class FailLogin {
         assertEquals(failText, driver.findElement(By.cssSelector("#reg-view > h2")).getText());
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
         driver.quit();

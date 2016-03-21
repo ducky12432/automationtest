@@ -10,8 +10,11 @@ import java.security.SecureRandom;
 import java.math.BigInteger;
 import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
+/**
+ * Created by dnewell on 3/20/16.
+ * This Test Class Registers a new user and sends an invitation email to a friend.
+ */
 public class Register {
     private SecureRandom random = new SecureRandom();
     private WebDriver driver;
@@ -26,11 +29,18 @@ public class Register {
     private String registrationComplete = "How nice of you to give your friend a chance to win. " +
             "I hope they appreciate your generosity. Come back tomorrow for another chance to win.";
 
+    /**
+     *
+     * @return
+     */
     public String randomText() {
         return new BigInteger(16, random).toString(16);
     }
 
-
+    /**
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
@@ -38,6 +48,10 @@ public class Register {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testRegister() throws Exception {
         driver.get(baseUrl + "automationtest/");
@@ -66,6 +80,10 @@ public class Register {
 
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
         driver.quit();

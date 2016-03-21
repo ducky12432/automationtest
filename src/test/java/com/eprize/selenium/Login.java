@@ -11,6 +11,12 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Created by dnewell on 3/20/16.
+ * This Test Class Logs in an existing user. It assumes it is being run immediately after registering.
+ * If this is not to be used immediately after registering it will need to be modified for the correct message.
+ * Additionally that is another use case and tests that needs to be performed given the proper facilities.
+ */
 public class Login {
     private SecureRandom random = new SecureRandom();
     private WebDriver driver;
@@ -26,10 +32,18 @@ public class Login {
             "I hope they appreciate your generosity. " +
             "Come back tomorrow for another chance to win.";
 
+    /**
+     *
+     * @return
+     */
     public String randomText() {
         return new BigInteger(16, random).toString(16);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
@@ -37,6 +51,10 @@ public class Login {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testLoginValid() throws Exception {
         driver.get(baseUrl + "automationtest/");
@@ -74,6 +92,10 @@ public class Login {
         assertEquals(userFriend, driver.findElement(By.cssSelector("p")).getText());
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
         driver.quit();
