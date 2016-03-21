@@ -5,13 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
-
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
-
-import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -19,9 +15,10 @@ public class Login {
     private SecureRandom random = new SecureRandom();
     private WebDriver driver;
     private String baseUrl;
-    private boolean acceptNextAlert = true;
-    private StringBuffer verificationErrors = new StringBuffer();
 
+    //setting the variable in the suite is not the best practise but for this purpose it will work.
+    //The best case is to use a generic set of parameters that are sent in as maven parameters when executed in Jenkins
+    //
     private String userEmail = "newell.donald@gmail.com";
     private String friendName = "John";
     private String friendEmail = "ducky12432+" + randomText() + "@hotmail.com";
@@ -48,15 +45,17 @@ public class Login {
     @Test
     public void testLoginValid() throws Exception {
         driver.get(baseUrl + "automationtest/");
-        /*if (driver.findElement(By.cssSelector("h2")).getText().contentEquals("Enter Now")){
-            driver.findElement(By.linkText("Returning")).click();
-        }*/
-
-        driver.findElement(By.linkText("Returning?")).click();
+        try {
+            driver.findElement(By.linkText("Returning?")).click();  //make sure the correct page loads and this element is present
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys(userEmail);
         driver.findElement(By.cssSelector("button[type=\"submit\"]")).click();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);\
+
+        //had some page load timing issues. Make sure to catch the correct page element.
         for (int second = 0; ; second++) {
             if (second >= 60) fail("timeout");
             try {
@@ -69,6 +68,9 @@ public class Login {
 
         driver.findElement(By.linkText("Continue/Close")).click();
         assertEquals(fillEmail, driver.findElement(By.cssSelector("p")).getText());
+
+        //we have already covered this in registration but it doesnt hurt to make sure the journey though this is also in working order.
+
         driver.findElement(By.id("to_name1")).clear();
         driver.findElement(By.id("to_name1")).sendKeys(friendName);
         driver.findElement(By.id("to_email1")).clear();
@@ -82,9 +84,5 @@ public class Login {
     @After
     public void tearDown() throws Exception {
         driver.quit();
-        String verificationErrorString = verificationErrors.toString();
-        if (!"".equals(verificationErrorString)) {
-            fail(verificationErrorString);
-        }
     }
 }

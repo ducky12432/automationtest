@@ -8,20 +8,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import java.security.SecureRandom;
 import java.math.BigInteger;
-import java.sql.Time;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class Register {
     private SecureRandom random = new SecureRandom();
     private WebDriver driver;
     private String baseUrl;
-    private boolean acceptNextAlert = true;
-    private StringBuffer verificationErrors = new StringBuffer();
     private String userNameFirst = "Don";
     private String userNameLast = "Newell";
     private String userEmail = "newell.donald+" + randomText() + "@gmail.com";
@@ -47,7 +41,7 @@ public class Register {
     @Test
     public void testRegister() throws Exception {
         driver.get(baseUrl + "automationtest/");
-        if (driver.findElement(By.cssSelector("h2")).getText() == "Login Now"){
+        if (driver.findElement(By.cssSelector("h2")).getText().equals("Login Now")){
             driver.findElement(By.linkText("Not registered?")).click();
         }
         driver.findElement(By.id("first_name")).clear();
@@ -75,9 +69,5 @@ public class Register {
     @After
     public void tearDown() throws Exception {
         driver.quit();
-        String verificationErrorString = verificationErrors.toString();
-        if (!"".equals(verificationErrorString)) {
-            fail(verificationErrorString);
-        }
     }
 }
